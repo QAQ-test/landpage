@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Repo Landing</title>
+  <style>
+    /* Minimal, no external CSS */
+    :root { --bg:#0b1020; --fg:#eaeef7; --muted:#9aa3b2; --card:#121832; --line:#27324e; }
+    * { box-sizing: border-box; }
+    body { margin:0; font-family: ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";
+           background: linear-gradient(180deg, var(--bg), #12162a); color: var(--fg); }
+    a { color: inherit; text-decoration: none; }
+    .wrap { max-width: 960px; margin: 0 auto; padding: 24px; }
+    header { display:flex; align-items:center; justify-content:space-between; padding:16px 0; border-bottom:1px solid var(--line); }
+    nav a { margin-left:16px; opacity:.9 }
+    nav a:hover { opacity:1 }
+    .hero { display:grid; grid-template-columns:1.2fr .8fr; gap:24px; padding:32px 0; }
+    .title { font-size: clamp(28px, 4vw, 44px); font-weight:800; line-height:1.1; }
+    .desc { color: var(--muted); margin-top:12px; font-size: 1.05rem; }
+    .badges { display:flex; gap:8px; margin-top:16px; flex-wrap:wrap; }
+    .btns { display:flex; gap:10px; margin-top:18px; flex-wrap:wrap; }
+    .btn { padding:10px 14px; border:1px solid var(--line); border-radius:12px; background:transparent; }
+    .btn.primary { background:#2563eb; border-color:#2563eb; color:white; }
+    .card { background: var(--card); border:1px solid var(--line); border-radius:16px; padding:16px; }
+    .grid { display:grid; gap:16px; }
+    .grid.features { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+    pre { background:#0a0f22; color:#dbe3ff; padding:12px; border-radius:12px; overflow:auto; border:1px solid var(--line); }
+    footer { margin:36px 0 12px; color: var(--muted); font-size:.9rem; text-align:center; }
+    .muted { color: var(--muted); font-size:.9rem; }
+    @media (max-width: 860px) { .hero { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div id="brand" style="font-weight:700">repo-name</div>
+      <nav>
+        <a href="#quickstart">快速開始</a>
+        <a href="#release">版本</a>
+        <a href="#about">關於</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div>
+        <h1 class="title" id="title">owner/repo</h1>
+        <p class="desc" id="desc">A concise repo description goes here.</p>
+        <div class="badges" id="badges">
+          <!-- Shields badges inserted by JS -->
+        </div>
+        <div class="btns">
+          <a class="btn primary" id="btnGitHub" target="_blank" rel="noreferrer">View on GitHub</a>
+          <a class="btn" id="btnTemplate" target="_blank" rel="noreferrer">Use this Template</a>
+          <a class="btn" id="btnZip" target="_blank" rel="noreferrer">Download ZIP</a>
+        </div>
+      </div>
+      <div>
+        <div class="card" style="height:220px; display:grid; place-items:center; text-align:center;">
+          <div>
+            <div style="font-size:56px">🚀</div>
+            <div class="muted" style="margin-top:8px">Place a screenshot or product GIF here</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="quickstart" class="grid" style="margin-top:12px">
+      <div class="card">
+        <h2 style="margin:0 0 8px">快速開始</h2>
+        <ol style="margin: 8px 0 0 18px; line-height:1.7">
+          <li>Clone 專案
+            <pre><code id="cloneCmd">git clone https://github.com/OWNER/REPO.git
+cd REPO</code></pre>
+          </li>
+          <li>安裝 / 執行
+            <pre><code># Node 專案示例
+npm i
+npm run dev
+
+# or Python / Go / etc (自行替換)</code></pre>
+          </li>
+          <li>部署：Vercel / Docker / K8s（視你的技術棧）</li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="release" class="grid" style="margin-top:16px">
+      <div class="card">
+        <h2 style="margin:0 0 8px">最新版本</h2>
+        <div id="releaseBox" class="muted">載入中…</div>
+      </div>
+    </section>
+
+    <section id="about" class="grid" style="margin-top:16px">
+      <div class="card">
+        <h2 style="margin:0 0 8px">關於這個 Repo</h2>
+        <p class="muted">這是極簡版 Landing Page。只要改 owner/name，就能自動顯示 GitHub 資訊（stars/forks/issues/license、最新 release）。</p>
+      </div>
+    </section>
+
+    <footer>© <span id="year"></span> • Built with plain HTML/CSS/JS</footer>
+  </div>
+
+  <script>
+    // --- Configure your GitHub repo here ---
+    const REPO_OWNER = "J-I-P";   // e.g. "facebook"
+    const REPO_NAME  = "youtube_test"; // e.g. "react"
+    // ---------------------------------------
+
+    // Helper: safe text
+    const text = (v) => (v == null ? "" : String(v));
+
+    // Set static links/texts right away
+    const repoUrl = `https://github.com/${REPO_OWNER}/${REPO_NAME}`;
+    document.getElementById("brand").textContent = REPO_NAME;
+    document.getElementById("title").textContent = `${REPO_OWNER}/${REPO_NAME}`;
+    document.getElementById("btnGitHub").href = repoUrl;
+    document.getElementById("btnTemplate").href = `${repoUrl}/generate`;
+    document.getElementById("btnZip").href = `${repoUrl}/archive/refs/heads/main.zip`;
+    document.getElementById("cloneCmd").textContent =
+`git clone https://github.com/${REPO_OWNER}/${REPO_NAME}.git
+cd ${REPO_NAME}`;
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Shields.io badges (no auth needed)
+    const shields = [
+      `https://img.shields.io/github/stars/${REPO_OWNER}/${REPO_NAME}.svg?style=flat`,
+      `https://img.shields.io/github/forks/${REPO_OWNER}/${REPO_NAME}.svg?style=flat`,
+      `https://img.shields.io/github/issues/${REPO_OWNER}/${REPO_NAME}.svg?style=flat`,
+      `https://img.shields.io/github/license/${REPO_OWNER}/${REPO_NAME}.svg?style=flat`,
+    ];
+    const badgesEl = document.getElementById("badges");
+    shields.forEach(src => {
+      const img = new Image();
+      img.src = src;
+      img.alt = "badge";
+      img.height = 20;
+      img.loading = "lazy";
+      badgesEl.appendChild(img);
+    });
+
+    // Fetch repo + latest release (public GitHub API; may be rate-limited without token)
+    const repoApi = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}`;
+    (async () => {
+      try {
+        // Repo info
+        const r = await fetch(repoApi, { cache: "no-store" });
+        if (r.ok) {
+          const repo = await r.json();
+          document.getElementById("desc").textContent =
+            text(repo.description) || "A modern repository.";
+        }
+
+        // Latest release
+        const rel = await fetch(`${repoApi}/releases/latest`, { cache: "no-store" });
+        const box = document.getElementById("releaseBox");
+        if (rel.ok) {
+          const data = await rel.json();
+          const published = new Date(data.published_at).toLocaleDateString();
+          box.innerHTML = `
+            <div style="display:flex; align-items:center; justify-content:space-between; gap:8px; flex-wrap:wrap">
+              <div>
+                <div style="font-weight:700">${text(data.name) || text(data.tag_name) || "Release"}</div>
+                <div class="muted">發布日期：${published}</div>
+              </div>
+              <a class="btn" href="${text(data.html_url)}" target="_blank" rel="noreferrer">View on GitHub</a>
+            </div>
+            ${data.body ? `<pre style="margin-top:12px; white-space:pre-wrap;">${text(data.body).slice(0, 1200)}</pre>` : ""}
+          `;
+        } else {
+          box.textContent = "尚未發布 Release（或此 repo 無公開 release）。";
+        }
+      } catch (e) {
+        document.getElementById("releaseBox").textContent = "讀取 GitHub 資訊失敗（可能達到 API 限額）。";
+      }
+    })();
+  </script>
+</body>
+</html>
