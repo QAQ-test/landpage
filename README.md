@@ -36,7 +36,7 @@
    cd landpage
    ```
 
-2. **修改配置** (目前設定為 J-I-P/youtube_test)
+2. **修改配置** (目前設定為 QAQ-test/landpage)
    
    編輯 `landingpage.html` 第 105-106 行：
    ```javascript
@@ -73,7 +73,7 @@
 ## 📋 目前專案配置 (Current Configuration)
 
 此範例專案目前配置為展示：
-- **Repository**: `J-I-P/youtube_test`
+- **Repository**: `QAQ-test/landpage`
 - **功能展示**: 自動拉取該專案的 stars、forks、issues、license 等資訊
 - **Release 資訊**: 顯示最新版本發佈資訊
 - **Clone 指令**: 自動生成正確的 git clone 指令
@@ -221,10 +221,10 @@ vercel --public
 
 ## 📸 預覽截圖 (Preview)
 
-目前專案配置為展示 `J-I-P/youtube_test` 專案：
+目前專案配置為展示 `QAQ-test/landpage` 專案：
 
 ```
-🚀 J-I-P/youtube_test
+🚀 QAQ-test/landpage
    [Stars] [Forks] [Issues] [License] 徽章
 
    快速開始                    [🚀 產品預覽區域]
@@ -275,7 +275,7 @@ vercel --public
 - **專案維護者**: Yi-Ping Jiang (J-I-P)
 - **GitHub**: [@J-I-P](https://github.com/J-I-P)
 - **專案連結**: [QAQ-test/landpage](https://github.com/QAQ-test/landpage)
-- **範例展示**: 目前配置為 [J-I-P/youtube_test](https://github.com/J-I-P/youtube_test)
+- **範例展示**: 目前配置為 [QAQ-test/landpage](https://github.com/QAQ-test/landpage)
 
 ## 🙏 致謝 (Acknowledgments)
 
